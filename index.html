@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,24 +8,189 @@
   <link rel="icon" type="image/x-icon" href="assets/img/zeri-icon.png">
 
   <title>Le chiese di Bologna</title>
+
+  <!-- Google Fonts: Cormorant Garamond (serif, headings) + Inter (sans, body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Instrument+Sans:wght@400;500&display=swap"
+    rel="stylesheet" />
+
+  <!-- Stylesheets -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4/dist/maplibre-gl.css" />
   <link rel="stylesheet" href="main.css" />
-</head>
-<body>
 
-  <div id="map"></div>
-
-  <div id="hero">
-    <h1>Chiese e Monumenti<br>di Bologna</h1>
-    <p>Un viaggio nel patrimonio sacro della città.</p>
-    <button id="btn">Inizia</button>
-  </div>
-
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="https://unpkg.com/maplibre-gl@4/dist/maplibre-gl.js"></script>
   <script src="https://unpkg.com/@maplibre/maplibre-gl-leaflet@0.0.21/leaflet-maplibre-gl.js"></script>
+</head>
+
+<body>
+
+  <div id="hero">
+
+    <div id="hero-logos">
+      <a href="https://fondazionezeri.unibo.it/it" target="_blank" rel="noopener" class="hero-logo-link">
+        <img src="assets/images/logo-zeri-square.jpg" alt="Fondazione Federico Zeri" />
+      </a>
+      <a href="https://fondazionecarisbo.it/" target="_blank" rel="noopener" class="hero-logo-link">
+        <img src="assets/images/logo-carisbo-square.jpg" alt="Fondazione Carisbo" />
+      </a>
+    </div>
+
+    <div id="hero-center">
+      <h1>Itinerari nelle chiese<br>di Bologna</h1>
+      <p>Un viaggio nel patrimonio ecclesiastico bolognese attraverso le fotografie di Mario Berardi.</p>
+    </div>
+
+    <button id="btn" aria-label="Inizia">&#8595;</button>
+
+  </div>
+
+
+  <div id="map"></div>
+
+  <!-- Left floating panel -->
+  <div id="left-panel">
+    <div id="panel-header">
+      <h4>Il patrimonio ecclesiastico bolognese</h4>
+      <button class="ctrl-btn" id="btn-info" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-info"
+        title="Informazioni">
+        <i class="bi bi-info-circle"></i>
+      </button>
+    </div>
+
+    <div class="accordion" id="accordionLegenda">
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+            aria-expanded="true" aria-controls="collapseOne">
+            Legenda
+          </button>
+        </h2>
+        <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionLegenda">
+          <div class="accordion-body">
+            <div class="chip-list">
+
+              <div class="chip">
+                <span class="chip-dot" style="background:var(--col-church);"></span>
+                <span class="chip-label">Chiese</span>
+              </div>
+
+              <div class="chip">
+                <span class="chip-dot" style="background: var(--col-cathed);"></span>
+                <span class="chip-label">Basiliche e cattedrali</span>
+              </div>
+
+              <div class="chip">
+                <span class="chip-dot" style="background: var(--col-monast);"></span>
+                <span class="chip-label">Conventi e monasteri</span>
+              </div>
+
+              <div class="chip">
+                <span class="chip-dot" style="background: var(--col-museum);"></span>
+                <span class="chip-label">Musei</span>
+              </div>
+
+              <div class="chip">
+                <span class="chip-dot" style="background:var(--col-orator);"></span>
+                <span class="chip-label">Oratori</span>
+              </div>
+
+              <div class="chip">
+                <span class="chip-dot" style="background: var(--col-others);"></span>
+                <span class="chip-label">Altri luoghi di culto</span>
+              </div>
+
+              <!-- Chip with symbol instead of plain colour -->
+              <div class="chip">
+                <span class="chip-dot chip-dot--symbol" style="background:#333333;"><i class="bi bi-asterisk"></i></span>
+                <span class="chip-label">Non più esistente</span>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Offcanvas info -->
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas-info" aria-labelledby="offcanvas-info-label">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvas-info-label">La campagna fotografica di Mario Sansoni</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Chiudi"></button>
+    </div>
+    <div class="offcanvas-body">
+
+      <section class="info-section">
+        <h6>La campagna</h6>
+        <p>
+          Dal 1925 al 1951, la Frick Art Reference Library di New York (oggi Frick Art Research Library) incaricò il
+          fotografo fiorentino Mario Sansoni (1882-1975), inizialmente in società con Oreste Nesti, di realizzare una
+          serie di campagne fotografiche in Italia.
+        </p>
+
+        <p>
+          Le opere d’arte da riprodurre furono scelte da Helen Clay Frick, coadiuvata dai suoi consulenti storici
+          dell’arte, in particolare Frederick Mason Perkins, anche sulla base delle proposte del fotografo. Soggetti
+          privilegiati furono i cicli decorativi ad affresco e in generale la pittura italiana del Medioevo e del
+          Rinascimento.
+        </p>
+
+        <p>
+          In tutto furono realizzate 10,079 riprese in 657 località diverse, molte delle quali non visitate o solo
+          marginalmente toccate dai grandi fotografi commerciali. I negativi superstiti, 8,903, sono tuttora conservati
+          presso la <a href="https://www.frick.org/library/photoarchive/">Frick Art Research Library</a>. I positivi
+          tratti dalle lastre furono oggetto di scambio e si diffusero in molti archivi fotografici privati e
+          istituzionali in tutto il mondo.
+        </p>
+
+        <p>
+          La Fondazione Federico Zeri conserva oltre <a
+            href="https://catalogo.fondazionezeri.unibo.it/ricerca.v2.jsp?locale=it&decorator=layout_resp&apply=true&percorso_ricerca=F&filtrooccasionediscatto_F=Serie+di+campagne+fotografiche+sulle+opere+italiane+commissionate+a+Sansoni+dalla+Frick+Art+Reference+Library+tra+il+1925+e+il+1951&sortby=AUTORE&batch=10">1.500
+            fotografie</a> relative alla campagna, molte delle quali stampe vintage prodotte da Sansoni stesso.
+        </p>
+      </section>
+
+      <section class="info-section">
+        <h6>Per saperne di più</h6>
+        <p>
+        <ul>
+          <li>The Frick Photoarchive Acquisition Agents. <a
+              href="https://www.frick.org/library/photoarchive/history/agents">Link</a>.</li>
+          <li>The Frick Collection, "Sansoni, Mario [photogapher], 1925-1938. <a
+              href="https://archives.frick.org/repositories/3/archival_objects/5290">Link</a>.</li>
+          <li>Il Fondo Mario Sansoni presso la Direzione regionale musei dell’Emilia-Romagna. <a
+              href="http://www.censimento.fotografia.italia.it/fondi/fondo-mario-sansoni/">Link</a>.</li>
+        </ul>
+        </p>
+      </section>
+
+      <section class="info-section">
+        <h6>Crediti</h6>
+        <p>I dati relativi alla campagna fotografica, provenienti dal <a href="https://library.frick.org/">catalogo
+            della Frick Art Research Library</a> e dal <a href="https://catalogo.fondazionezeri.unibo.it/">database
+            della Fondazione Zeri</a>, sono stati estratti dalla piattaforma <a
+            href="https://artresearch.net/resource/Default:start">artresearch.net</a> nell'ambito del progetto <a
+            href="https://artresearch.net/resource/About">Pharos</a>.</p>
+        <p>Il progetto è stato realizzato dalla <a href="https://fondazionezeri.unibo.it/it">Fondazione Federico
+            Zeri</a> - Università di Bologna. Il codice, rilasciato con licenza CC-BY 4.0, è reperibile nell'apposita <a
+            href="https://github.com/FondazioneFedericoZeri/sansoni">repository</a> su GitHub.</p>
+      </section>
+
+    </div>
+  </div>
+
   <script src="main.js"></script>
 
 </body>
+
 </html>

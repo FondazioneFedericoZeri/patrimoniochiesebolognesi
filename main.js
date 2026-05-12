@@ -1,6 +1,6 @@
 // Leaflet map centred on Bologna's historic centre
 // zoomSnap: 0 allows fractional zoom levels (e.g. 15.5); zoomControl: false lets us place it manually
-const map = L.map('map', { scrollWheelZoom: true, zoomSnap: 0, zoomControl: false }).setView([44.4957, 11.3426], 15.7);
+const map = L.map('map', { scrollWheelZoom: true, zoomSnap: 0, zoomControl: false }).setView([44.495, 11.3426], 15.5);
 
 L.control.zoom({ position: 'topright' }).addTo(map);
 
