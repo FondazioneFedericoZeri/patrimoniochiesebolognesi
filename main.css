@@ -316,3 +316,7 @@ body {
   color: #333;
   white-space: nowrap;
 }
+
+.info-section h5 {
+  color: var(--zeri-blue-dark);
+}
