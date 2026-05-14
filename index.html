@@ -65,75 +65,72 @@
 
   <div id="map"></div>
 
-  <!-- Left floating panel -->
-  <div id="left-panel">
-    <div id="panel-header">
-      <h4>Il patrimonio ecclesiastico bolognese</h4>
-      <button class="ctrl-btn" id="btn-info" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-info"
-        title="Informazioni">
-        <i class="bi bi-info-circle"></i>
-      </button>
-    </div>
+  <!-- Floating UI controls (top-left) -->
+  <div id="ui-fab">
 
-    <div class="accordion" id="accordionLegenda">
-      <div class="accordion-item">
-        <h2 class="accordion-header">
-          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
-            aria-expanded="true" aria-controls="collapseOne">
-            Legenda
-          </button>
-        </h2>
-        <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionLegenda">
-          <div class="accordion-body">
-            <div class="chip-list">
+    <!-- 1. Info/title pill: click → offcanvas -->
+    <button class="fab-pill" id="btn-info-fab"
+      data-bs-toggle="offcanvas" data-bs-target="#offcanvas-info"
+      title="Informazioni sul progetto">
+      <i class="bi bi-info-lg"></i>
+      <span class="fab-pill-title">Itinerari nelle chiese di Bologna</span>
+    </button>
 
-              <div class="chip" data-category="Chiese">
-                <span class="chip-dot" style="background:var(--col-church);"></span>
-                <span class="chip-label">Chiese</span>
-              </div>
+    <!-- 2. Legend FAB: circle → espande su hover con titolo e chips -->
+    <div id="legend-fab">
+      <div id="legend-fab-icon">
+        <i class="bi bi-layers"></i>
+      </div>
+      <div id="legend-fab-body">
+        <p class="legend-title">Legenda</p>
+        <div class="chip-list">
 
-              <div class="chip" data-category="Basiliche e cattedrali">
-                <span class="chip-dot" style="background: var(--col-cathed);"></span>
-                <span class="chip-label">Basiliche e cattedrali</span>
-              </div>
-
-              <div class="chip" data-category="Conventi e monasteri">
-                <span class="chip-dot" style="background: var(--col-monast);"></span>
-                <span class="chip-label">Conventi e monasteri</span>
-              </div>
-
-              <div class="chip" data-category="Musei">
-                <span class="chip-dot" style="background: var(--col-museum);"></span>
-                <span class="chip-label">Musei</span>
-              </div>
-
-              <div class="chip" data-category="Oratori">
-                <span class="chip-dot" style="background:var(--col-orator);"></span>
-                <span class="chip-label">Oratori</span>
-              </div>
-
-              <div class="chip" data-category="Altri luoghi di culto">
-                <span class="chip-dot" style="background: var(--col-others);"></span>
-                <span class="chip-label">Altri luoghi di culto</span>
-              </div>
-
-              <!-- Chip with symbol instead of plain colour -->
-              <div class="chip" data-category="Non più esistente">
-                <span class="chip-dot chip-dot--symbol" style="background:#333333;"><i class="bi bi-asterisk"></i></span>
-                <span class="chip-label">Non più esistente</span>
-              </div>
-
-            </div>
+          <div class="chip" data-category="Chiese">
+            <span class="chip-dot" style="background:var(--col-church);"></span>
+            <span class="chip-label">Chiese</span>
           </div>
+
+          <div class="chip" data-category="Basiliche e cattedrali">
+            <span class="chip-dot" style="background:var(--col-cathed);"></span>
+            <span class="chip-label">Basiliche e cattedrali</span>
+          </div>
+
+          <div class="chip" data-category="Conventi e monasteri">
+            <span class="chip-dot" style="background:var(--col-monast);"></span>
+            <span class="chip-label">Conventi e monasteri</span>
+          </div>
+
+          <div class="chip" data-category="Musei">
+            <span class="chip-dot" style="background:var(--col-museum);"></span>
+            <span class="chip-label">Musei</span>
+          </div>
+
+          <div class="chip" data-category="Oratori">
+            <span class="chip-dot" style="background:var(--col-orator);"></span>
+            <span class="chip-label">Oratori</span>
+          </div>
+
+          <div class="chip" data-category="Altri luoghi di culto">
+            <span class="chip-dot" style="background:var(--col-others);"></span>
+            <span class="chip-label">Altri luoghi di culto</span>
+          </div>
+
+          <div class="chip" data-category="Non più esistente">
+            <span class="chip-dot chip-dot--symbol" style="background:#333333;"><i class="bi bi-asterisk"></i></span>
+            <span class="chip-label">Non più esistente</span>
+          </div>
+
         </div>
       </div>
     </div>
+
+
   </div>
 
   <!-- Offcanvas info -->
   <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas-info" aria-labelledby="offcanvas-info-label">
     <div class="offcanvas-header">
-      <h4 class="offcanvas-title" id="offcanvas-info-label">Il patrimonio ecclesiastio di Bolongna nelle fotografie di Mario Berardi</h4>
+      <h4 class="offcanvas-title" id="offcanvas-info-label">Il patrimonio ecclesiastico di Bologna nelle fotografie di Mario Berardi</h4>
       <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Chiudi"></button>
     </div>
     <div class="offcanvas-body">

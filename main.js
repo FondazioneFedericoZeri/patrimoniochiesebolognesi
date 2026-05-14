@@ -59,12 +59,12 @@ fetch('assets/data.csv')
 // ── Category → fill colour (reads directly from :root CSS variables) ─
 const _css = getComputedStyle(document.documentElement);
 const CATEGORY_COLORS = {
-  'Chiese':                _css.getPropertyValue('--col-church').trim(),
+  'Chiese':                 _css.getPropertyValue('--col-church').trim(),
   'Basiliche e cattedrali': _css.getPropertyValue('--col-cathed').trim(),
-  'Conventi e monasteri':  _css.getPropertyValue('--col-monast').trim(),
-  'Musei':                 _css.getPropertyValue('--col-museum').trim(),
-  'Oratori':               _css.getPropertyValue('--col-orator').trim(),
-  'Altri luoghi di culto': _css.getPropertyValue('--col-others').trim(),
+  'Conventi e monasteri':   _css.getPropertyValue('--col-monast').trim(),
+  'Musei':                  _css.getPropertyValue('--col-museum').trim(),
+  'Oratori':                _css.getPropertyValue('--col-orator').trim(),
+  'Altri luoghi di culto':  _css.getPropertyValue('--col-others').trim(),
 };
 
 // Returns true when the place is flagged as no longer existing.
@@ -244,10 +244,10 @@ function initMarkers() {
 // ── Hero button ───────────────────────────────────────────────────
 document.getElementById('btn').addEventListener('click', function () {
   const hero = document.getElementById('hero');
-  const panel = document.getElementById('left-panel');
+  const fab = document.getElementById('ui-fab');
 
   hero.classList.add('up');
-  panel.classList.add('visible');
+  fab.classList.add('visible');
 
   if (csvReady) {
     initMarkers();

@@ -181,102 +181,131 @@ body {
   }
 }
 
-/* ── Left floating panel ── */
-#left-panel {
+/* ── Floating action buttons (top-left) ── */
+#ui-fab {
   position: fixed;
   top: 24px;
   left: 24px;
-  width: 360px;
-  background: var(--surface);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  box-shadow: 0 2px 24px rgba(0, 0, 0, 0.10);
-  padding: 20px 22px;
   z-index: 1000;
   display: none;
   flex-direction: column;
-  gap: 16px;
-}
-
-#left-panel.visible {
-  display: flex;
-}
-
-#panel-header {
-  display: flex;
   align-items: flex-start;
-  gap: 8px;
+  gap: 10px;
 }
 
-.ctrl-btn {
-  width: 34px;
-  height: 34px;
+#ui-fab.visible {
+  display: flex;
+}
+
+/* Shared surface style for pill */
+.fab-pill {
+  background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 50%;
-  background: #fff;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   color: var(--text-primary);
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-  transition: background 0.15s, color 0.15s;
-  flex-shrink: 0;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
 }
 
-.ctrl-btn:hover {
+.fab-pill:hover {
   background: var(--bg-chip);
   color: var(--zeri-blue-dark);
   border-color: #c9ddf0;
 }
 
-/* ── Accordion overrides (no box, no Bootstrap blue) ── */
-#left-panel .accordion-item {
-  border: none;
-  background: transparent;
-}
-
-#left-panel .accordion-button {
-  background: transparent;
-  color: inherit;
+/* ── Info pill (icon + title) ── */
+.fab-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 44px;
+  padding: 0 16px 0 12px;
+  border-radius: 999px;
   font-family: var(--font-sans);
-  font-size: var(--text-base);
-  font-weight: 500;
-  padding: 0.5rem 0;
-  box-shadow: none;
-  border-bottom: 1px solid var(--border);
-}
-
-/* Remove the blue highlight and focus ring when open */
-#left-panel .accordion-button:not(.collapsed) {
-  background: transparent;
-  color: inherit;
-  box-shadow: none;
-}
-
-#left-panel .accordion-button:focus {
-  box-shadow: none;
-  outline: none;
-}
-
-/* Keep the chevron but make it match the text colour */
-#left-panel .accordion-button::after {
-  filter: brightness(0) opacity(0.5);
-}
-
-#left-panel .accordion-button:not(.collapsed)::after {
-  filter: brightness(0) opacity(0.5);
-}
-
-#left-panel .accordion-body {
-  padding: 0.75rem 0 0 0;
   font-size: var(--text-sm);
+  font-weight: 500;
+  max-width: 300px;
 }
 
-#left-panel .accordion-collapse {
-  border: none;
+.fab-pill i {
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.fab-pill-title {
+  font-size: var(--text-base);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Legend FAB: cerchio → card espandibile su hover ── */
+#legend-fab {
+  width: 44px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 22px;
+  overflow: hidden;
+  color: var(--text-primary);
+  /* chiusura: aspetta che il contenuto si nasconda prima di restringere */
+  transition: width 0.22s ease 0.15s, border-radius 0.22s ease 0.15s;
+}
+
+#legend-fab:hover {
+  width: 300px;
+  border-radius: 16px;
+  /* apertura: larghezza si apre subito */
+  transition: width 0.2s ease, border-radius 0.2s ease;
+}
+
+#legend-fab-icon {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+  color: inherit;
+  transition: color 0.15s;
+}
+
+#legend-fab:hover #legend-fab-icon {
+  color: var(--zeri-blue-dark);
+}
+
+#legend-fab-body {
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 14px;
+  /* chiusura: si nasconde subito */
+  transition: max-height 0.15s ease;
+}
+
+#legend-fab:hover #legend-fab-body {
+  max-height: 300px;
+  /* apertura: leggero ritardo per lasciare aprire la larghezza prima */
+  transition: max-height 0.3s ease 0.08s;
+}
+
+#legend-fab-body .chip-list {
+  margin-bottom: 14px;
+}
+
+.legend-title {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-top: 8px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
 
 /* ── Legend chips ── */
