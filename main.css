@@ -554,3 +554,28 @@ path.active-marker {
   --bs-btn-disabled-color:      var(--zeri-btn-sec);
   --bs-btn-disabled-border-color:var(--zeri-btn-sec);
 }
+
+/* ── Smartphone ── */
+@media (max-width: 576px) {
+  #ui-fab-top {
+    top: 12px;
+    left: 12px;
+  }
+
+  #legend-fab:hover {
+    width: calc(100vw - 24px);
+  }
+
+  #ui-fab-popup {
+    left: 12px;
+    bottom: 12px;
+  }
+
+  #popup-content {
+    width: calc(100vw - 24px);
+  }
+
+  #card-img {
+    max-height: 160px;
+  }
+}
