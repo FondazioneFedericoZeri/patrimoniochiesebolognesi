@@ -269,17 +269,13 @@ function initMarkers() {
         document.getElementById('card-img-container').style.display = 'none';
       }
 
-      // Main buttons
-      let linksCatalog = [(place.LDCN !== ""), (place.PRCD !== ""), (place.Scheda_Chiesa !== "")];
+      // Le opere nel contesto (LDCN, PRCD)
+      const hasCatalogLinks = place.LDCN !== "" || place.PRCD !== "";
 
-      if (linksCatalog.includes(true)) {
-
-        let btn_count = 0;
-        
+      if (hasCatalogLinks) {
         if (place.LDCN) {
           document.getElementById('btn-ldcn-container').style.display = 'inline-flex';
           document.getElementById('btn-ldcn').href = place.LDCN;
-          btn_count++;
         } else {
           document.getElementById('btn-ldcn-container').style.display = 'none';
         }
@@ -287,36 +283,22 @@ function initMarkers() {
         if (place.PRCD) {
           document.getElementById('btn-prcd-container').style.display = 'inline-flex';
           document.getElementById('btn-prcd').href = place.PRCD;
-          btn_count++;
         } else {
           document.getElementById('btn-prcd-container').style.display = 'none';
         }
 
-        if (place.Scheda_Chiesa) {
-
-          // Resize the final button
-          const btnSiteContainer = document.getElementById('btn-site-container');
-          if (btn_count == 1 && btnSiteContainer.classList.contains("col-12")) {
-            btnSiteContainer.classList.remove('col-12');
-            btnSiteContainer.classList.add('col-6');
-          } else if (btn_count == 2 && btnSiteContainer.classList.contains("col-6")) {
-            btnSiteContainer.classList.remove('col-6');
-            btnSiteContainer.classList.add('col-12');
-          }
-
-          document.getElementById('btn-site').style.display = 'inline-flex';
-          document.getElementById('btn-site').href = place.Scheda_Chiesa;
-
-        } else {
-          document.getElementById('btn-site').style.display = 'none';
-        }
-
         document.getElementById('catalogue-links').style.display = 'block';
-
       } else {
-
         document.getElementById('catalogue-links').style.display = 'none';
+      }
 
+      // Il sito (Scheda_Chiesa)
+      if (place.Scheda_Chiesa) {
+        //document.getElementById('title-site-section').textContent = place.Contenitore;
+        document.getElementById('btn-site').href = place.Scheda_Chiesa;
+        document.getElementById('site-links').style.display = 'block';
+      } else {
+        document.getElementById('site-links').style.display = 'none';
       }
 
       // Additional resources
@@ -379,6 +361,12 @@ document.getElementById('btn').addEventListener('click', function () {
 
   hero.classList.add('up');
   fab.classList.add('visible');
+
+  // Show intro modal after the hero has finished lifting (1.1s transition)
+  setTimeout(function () {
+    const introModal = new bootstrap.Modal(document.getElementById('modal-intro'));
+    introModal.show();
+  }, 1000);
 
   if (csvReady) {
     initMarkers();

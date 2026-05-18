@@ -7,14 +7,11 @@
 
   /* Type scale — base 16 px */
   --text-sm: 0.875rem;
-  /* 14 px */
   --text-base: 1rem;
-  /* 16 px */
   --text-lg: 1.125rem;
-  /* 18 px */
   --text-xl: 1.375rem;
-  /* 22 px */
   --text-2xl: clamp(2rem, 5vw, 3.5rem);
+  --text-3xl: clamp(2.75rem, 8vw, 5.5rem);  /* 44 px → 88 px */
 
   /* UI surfaces */
   --surface: rgba(255, 255, 255, 0.82);
@@ -72,9 +69,8 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 1001;
-  /* above Leaflet controls (z-index 1000) */
-  background: rgba(0, 0, 0, 0.6);
+  z-index: 1001; /* above Leaflet controls (z-index 1000) */
+  background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   color: #fff;
@@ -134,14 +130,14 @@ body {
 
 #hero-center h1 {
   font-family: var(--font-serif);
-  font-size: var(--text-2xl);
+  font-size: var(--text-3xl);
   font-weight: 700;
   line-height: 1.15;
 }
 
 #hero-center p {
   font-family: var(--font-sans);
-  font-size: var(--text-lg);
+  font-size: var(--text-xl);
   /* 18 px */
   font-weight: 400;
   opacity: 0.78;
@@ -231,18 +227,17 @@ body {
   border-color: #c9ddf0;
 }
 
-/* ── Info pill (icon + title) ── */
+/* ── Info pill (CTA style) ── */
 .fab-pill {
   display: flex;
   align-items: center;
   gap: 8px;
   height: 44px;
-  padding: 0 16px 0 12px;
+  padding: 0 14px 0 18px;
   border-radius: 999px;
   font-family: var(--font-sans);
   font-size: var(--text-sm);
   font-weight: 500;
-  max-width: 300px;
 }
 
 .fab-pill i {
@@ -257,6 +252,18 @@ body {
   text-overflow: ellipsis;
 }
 
+.fab-pill--cta {
+  width: calc(320px + 10px + 44px); /*Sum of below fabs + gap*/
+  height: 52px;
+  padding: 0 16px 0 22px;
+  font-size: var(--text-lg);
+}
+
+.fab-pill--cta .fab-pill-title {
+  font-size: var(--text-xl);
+  font-weight: 500;
+}
+
 .fab-box {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -268,18 +275,15 @@ body {
   color: var(--text-primary);
 }
 
-/* ── Legend FAB: cerchio → card espandibile su hover ── */
+/* ── Legend FAB: always visible ── */
 #legend-fab {
-  width: 44px;
-  /* chiusura: aspetta che il contenuto si nasconda prima di restringere */
-  transition: width 0.22s ease 0.15s, border-radius 0.22s ease 0.15s;
+  width: 320px;
+  border-radius: 16px;
 }
 
-#legend-fab:hover {
-  width: 300px;
-  border-radius: 16px;
-  /* apertura: larghezza si apre subito */
-  transition: width 0.2s ease, border-radius 0.2s ease;
+#legend-fab-header {
+  display: flex;
+  align-items: center;
 }
 
 #legend-fab-icon {
@@ -290,30 +294,26 @@ body {
   justify-content: center;
   font-size: 18px;
   flex-shrink: 0;
-  color: inherit;
-  transition: color 0.15s;
-}
-
-#legend-fab:hover #legend-fab-icon {
   color: var(--zeri-blue-dark);
 }
 
-#legend-fab-body {
-  max-height: 0;
-  overflow: hidden;
-  padding: 0 14px;
-  /* chiusura: si nasconde subito */
-  transition: max-height 0.15s ease;
+#legend-fab-header .legend-title {
+  margin: 0;
 }
 
-#legend-fab:hover #legend-fab-body {
-  max-height: 300px;
-  /* apertura: leggero ritardo per lasciare aprire la larghezza prima */
-  transition: max-height 0.3s ease 0.08s;
+#fab-row {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+#legend-fab-body {
+  padding: 0 14px 14px;
 }
 
 #legend-fab-body .chip-list {
-  margin-bottom: 14px;
+  margin-bottom: 0;
 }
 
 .legend-title {
@@ -367,6 +367,32 @@ body {
   font-size: var(--text-sm);
   color: #333;
   white-space: nowrap;
+}
+
+/* ── Circular FAB button (3rd element in ui-fab-top) ── */
+.fab-circle-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: var(--text-primary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.fab-circle-btn:hover {
+  background: var(--bg-chip);
+  color: var(--zeri-blue-dark);
+  border-color: #c9ddf0;
 }
 
 .info-section h5 {
@@ -562,7 +588,7 @@ path.active-marker {
     left: 12px;
   }
 
-  #legend-fab:hover {
+  #legend-fab {
     width: calc(100vw - 24px);
   }
 

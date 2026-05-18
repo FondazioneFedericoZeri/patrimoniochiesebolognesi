@@ -69,60 +69,76 @@
   <!-- Floating UI controls (top-left) -->
   <div id="ui-fab-top" class="fab">
 
-    <!-- 1. Info/title pill: click → offcanvas -->
-    <button class="fab-pill" id="btn-info-fab" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-info"
-      title="Informazioni sul progetto">
-      <i class="bi bi-info-lg"></i>
-      <span class="fab-pill-title">Itinerari nelle chiese di Bologna</span>
-    </button>
+          <!-- CTA pill: click → offcanvas -->
+      <button class="fab-pill fab-pill--cta justify-content-between d-flex align-items-center" id="btn-info-fab" data-bs-toggle="offcanvas"
+        data-bs-target="#offcanvas-info">
+        <span class="fab-pill-title">Per saperne di più</span>
+        <i class="bi bi-chevron-right"></i>
+      </button>
 
-    <!-- 2. Legend FAB: circle → espande su hover con titolo e chips -->
-    <div id="legend-fab" class="fab-box">
-      <div id="legend-fab-icon">
-        <i class="bi bi-layers"></i>
-      </div>
-      <div id="legend-fab-body">
-        <p class="legend-title">Legenda</p>
-        <div class="chip-list">
+    <!-- Legend FAB + info button, same row -->
+    <div id="fab-row">
 
-          <div class="chip" data-category="Chiese">
-            <span class="chip-dot" style="background:var(--col-church);"></span>
-            <span class="chip-label">Chiese</span>
+      <!-- Circular button → modal -->
+      <button class="fab-circle-btn" id="btn-fab-modal" data-bs-toggle="modal" data-bs-target="#modal-fab">
+        <i class="bi bi-question-lg"></i>
+      </button>
+
+          <div id="legend-fab" class="fab-box">
+        <div id="legend-fab-header">
+          <div id="legend-fab-icon">
+            <i class="bi bi-layers"></i>
           </div>
-
-          <div class="chip" data-category="Basiliche e cattedrali">
-            <span class="chip-dot" style="background:var(--col-cathed);"></span>
-            <span class="chip-label">Basiliche e cattedrali</span>
-          </div>
-
-          <div class="chip" data-category="Conventi e monasteri">
-            <span class="chip-dot" style="background:var(--col-monast);"></span>
-            <span class="chip-label">Conventi e monasteri</span>
-          </div>
-
-          <div class="chip" data-category="Musei">
-            <span class="chip-dot" style="background:var(--col-museum);"></span>
-            <span class="chip-label">Musei</span>
-          </div>
-
-          <div class="chip" data-category="Oratori">
-            <span class="chip-dot" style="background:var(--col-orator);"></span>
-            <span class="chip-label">Oratori</span>
-          </div>
-
-          <div class="chip" data-category="Altri luoghi di culto">
-            <span class="chip-dot" style="background:var(--col-others);"></span>
-            <span class="chip-label">Altri luoghi di culto</span>
-          </div>
-
-          <div class="chip" data-category="Non più esistente">
-            <span class="chip-dot chip-dot--symbol" style="background:#333333;"><i class="bi bi-asterisk"></i></span>
-            <span class="chip-label">Non più esistente</span>
-          </div>
-
+          <p class="legend-title">Legenda</p>
         </div>
+
+            <div id="legend-fab-body">
+      <div class="chip-list">
+
+        <div class="chip" data-category="Chiese">
+          <span class="chip-dot" style="background:var(--col-church);"></span>
+          <span class="chip-label">Chiese</span>
+        </div>
+
+        <div class="chip" data-category="Basiliche e cattedrali">
+          <span class="chip-dot" style="background:var(--col-cathed);"></span>
+          <span class="chip-label">Basiliche e cattedrali</span>
+        </div>
+
+        <div class="chip" data-category="Conventi e monasteri">
+          <span class="chip-dot" style="background:var(--col-monast);"></span>
+          <span class="chip-label">Conventi e monasteri</span>
+        </div>
+
+        <div class="chip" data-category="Musei">
+          <span class="chip-dot" style="background:var(--col-museum);"></span>
+          <span class="chip-label">Musei</span>
+        </div>
+
+        <div class="chip" data-category="Oratori">
+          <span class="chip-dot" style="background:var(--col-orator);"></span>
+          <span class="chip-label">Oratori</span>
+        </div>
+
+        <div class="chip" data-category="Altri luoghi di culto">
+          <span class="chip-dot" style="background:var(--col-others);"></span>
+          <span class="chip-label">Altri luoghi di culto</span>
+        </div>
+
+        <div class="chip" data-category="Non più esistente">
+          <span class="chip-dot chip-dot--symbol" style="background:#333333;"><i class="bi bi-asterisk"></i></span>
+          <span class="chip-label">Non più esistente</span>
+        </div>
+
       </div>
     </div>
+
+    </div>
+
+    </div>
+
+
+
 
   </div>
 
@@ -140,17 +156,17 @@
             </div>
             <button type="button" class="btn-close" aria-label="Close" onclick="closePopup()"></button>
           </div>
-      
+
           <div id="card-img-container">
-              <img src="assets/images/thumb/san-domenico.jpg" id="card-img">
+            <img src="assets/images/thumb/san-domenico.jpg" id="card-img">
           </div>
 
           <div id="catalogue-links">
-            
-            <p class="legend-title">Le opere nel contesto</p>
 
-            <p class="card-text">Esplora il sito e le opere qui documentate nel catalogo della Fondazione Zeri</p>
-            
+            <p class="legend-title">Dal catalogo della Fondazione Zeri</p>
+
+            <p class="card-text">Esplora le opere qui documentate nel corso dei secoli</p>
+
             <div class="row">
               <div class="col-6 btn-catalog-container" id="btn-ldcn-container">
                 <a href="#" class="btn btn-primary" id="btn-ldcn">Collocazione attuale</a>
@@ -158,20 +174,27 @@
               <div class="col-6 btn-catalog-container" id="btn-prcd-container">
                 <a href="#" class="btn btn-secondary" id="btn-prcd">Collocazione precedente</a>
               </div>
-              <div class="col-12 btn-catalog-container mt-2" id="btn-site-container">
-                <a href="#" class="btn btn-outline-primary" id="btn-site">Il sito - Basilica di S. Domenico</a>
-              </div>
+            </div>
+          </div>
+
+          <div id="site-links" class="row mt-3">
+            <!--p class="legend-title mt-3" id="title-site-section">Il sito</p-->
+            <p class="card-text" id="site-description">Leggi la scheda di questo luogo di culto</p>
+            <div class="btn-site-container col-6">
+              <a href="#" class="btn btn-outline-primary w-100" id="btn-site">Il sito nel catalogo</a>
             </div>
           </div>
 
           <div id="additional-links">
-            <p class="legend-title mt-4">Per saperne di più</p>
+            <p class="legend-title mt-4">Altre risorse</p>
 
             <ul id="link-list">
-              <li><a href="https://catalogo.fondazionezeri.unibo.it/scheda.livello.jsp?decorator=layout_resp&apply=true&locale=it&id=4&tipo_scheda=fondo" target="_blank" rel="noopener">L'Archivio Mario Berardi nella Fototeca Zeri</a>
+              <li><a
+                  href="https://catalogo.fondazionezeri.unibo.it/scheda.livello.jsp?decorator=layout_resp&apply=true&locale=it&id=4&tipo_scheda=fondo"
+                  target="_blank" rel="noopener">L'Archivio Mario Berardi nella Fototeca Zeri</a>
             </ul>
           </div>
-          
+
         </div>
       </div>
     </div>
@@ -235,6 +258,41 @@
             href="https://github.com/FondazioneFedericoZeri/carisbo">repository</a> su GitHub.</p>
       </section>
 
+    </div>
+  </div>
+
+  <!-- Intro modal: static backdrop, shown on hero lift -->
+  <div class="modal fade" id="modal-intro" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="modal-intro-label" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body">
+          <h5 class="modal-title mb-3" id="modal-intro-label">Una nuova esplorazione del catalogo Zeri</h5>
+          <p>La Fondazione Zeri ti dà il benvenuto in questo nuovo progetto per esplorare le opere del patrimonio ecclesiastico bolognese documentate nel proprio catalogo.</p>
+          <p>Questa applicazione propone un mappa interattiva dove si potranno creare nuovi itinerari fra vari edifici di culto della città di Bologna, scoprire le opere appartenenti a questi contesti e approfondire i siti più importanti.</p>
+          <p>Il progetto, finanziato dalla Fondazione Carisbo, vuole rendere disponibile al più vasto pubblico l'archivio del fotografo bolognese <a href="https://catalogo.fondazionezeri.unibo.it/scheda.livello.jsp?decorator=layout_resp&apply=true&locale=it&id=4&tipo_scheda=fondo">Mario Berardi</a>, recentemente schedato dal team della Fondazione.</p>
+          <div class="justify-content-end d-flex mt-3">
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Esplora la mappa</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAB circular button modal -->
+  <div class="modal fade" id="modal-fab" tabindex="-1" aria-labelledby="modal-fab-label" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body">
+          <h5 class="modal-title mb-3" id="modal-fab-label">Istruzioni per la navigazione</h5>
+          <p>La mappa interattiva può essere esplorata per scoprire e approfondire le opere e i luoghi di culto bolognesi documentati nel catalogo. È possibile ampliare e ridurre l'area visualizzata da mouse e tramite i pulsanti in alto a destra.</p>
+          <p>I segnaposto riportati indicano uno specifico luogo di culto; il colore associa ogni contesto con la categoria riportata nella legenda interrattiva. Cliccando sui segnaposti è possibile scoprire informazioni dettagliate su ciascun luogo e sulle opere in esso documentate (attualmente o in passato).</p>
+          <p>Il pulsante in alto a sinistra permette di accedere a informazioni più dettagliate sul progetto, nonché su Mario Berardi, la sua attività e il suo fondo fotografico.</p>
+          <div class="justify-content-end d-flex mt-3">
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Continua l'esplorazione</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
