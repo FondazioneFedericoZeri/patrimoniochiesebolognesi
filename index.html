@@ -25,7 +25,7 @@
   <!-- Stylesheets -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
   <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4/dist/maplibre-gl.css" />
@@ -66,33 +66,45 @@
 
   <div id="map"></div>
 
+  <!-- Floating logos (top-center) -->
+  <div>
+    <div id="ui-float-logos" class="float">
+      <a href="https://fondazionezeri.unibo.it/it" target="_blank" rel="noopener" class="hero-logo-link">
+        <img src="assets/images/logo-zeri-square.jpg" alt="Fondazione Federico Zeri" />
+      </a>
+      <a href="https://fondazionecarisbo.it/" target="_blank" rel="noopener" class="hero-logo-link">
+        <img src="assets/images/logo-carisbo-square.jpg" alt="Fondazione Carisbo" />
+      </a>
+    </div>
+  </div>
+
   <!-- Floating UI controls (top-left) -->
-  <div id="ui-fab-top" class="fab">
+  <div id="ui-float-top" class="float">
 
           <!-- CTA pill: click → offcanvas -->
-      <button class="fab-pill fab-pill--cta justify-content-between d-flex align-items-center" id="btn-info-fab" data-bs-toggle="offcanvas"
+      <button class="float-pill float-pill--cta justify-content-between d-flex align-items-center" id="btn-info-float" data-bs-toggle="offcanvas"
         data-bs-target="#offcanvas-info">
-        <span class="fab-pill-title">Per saperne di più</span>
-        <i class="bi bi-chevron-right"></i>
+        <span class="float-pill-title">Per saperne di più</span>
+        <i class="fa-solid fa-chevron-right"></i>
       </button>
 
-    <!-- Legend FAB + info button, same row -->
-    <div id="fab-row">
+    <!-- Legend float + info button, same row -->
+    <div id="float-row">
 
       <!-- Circular button → modal -->
-      <button class="fab-circle-btn" id="btn-fab-modal" data-bs-toggle="modal" data-bs-target="#modal-fab">
-        <i class="bi bi-question-lg"></i>
+      <button class="float-circle-btn" id="btn-float-modal" data-bs-toggle="modal" data-bs-target="#modal-float">
+        <i class="fa-solid fa-question"></i>
       </button>
 
-          <div id="legend-fab" class="fab-box">
-        <div id="legend-fab-header">
-          <div id="legend-fab-icon">
-            <i class="bi bi-layers"></i>
+          <div id="legend-float" class="float-box">
+        <div id="legend-float-header">
+          <div id="legend-float-icon">
+            <i class="fa-solid fa-layer-group"></i>
           </div>
           <p class="legend-title">Legenda</p>
         </div>
 
-            <div id="legend-fab-body">
+            <div id="legend-float-body">
       <div class="chip-list">
 
         <div class="chip" data-category="Chiese">
@@ -126,7 +138,7 @@
         </div>
 
         <div class="chip" data-category="Non più esistente">
-          <span class="chip-dot chip-dot--symbol" style="background:#333333;"><i class="bi bi-asterisk"></i></span>
+          <span class="chip-dot chip-dot--symbol"><i class="fa-solid fa-asterisk"></i></span>
           <span class="chip-label">Non più esistente</span>
         </div>
 
@@ -143,47 +155,45 @@
   </div>
 
   <!-- Floating UI Popup (bottom-left) -->
-  <div id="ui-fab-popup" class="fab">
+  <div id="ui-float-popup" class="float">
 
-    <div id="popup-content" class="fab-box">
+    <div id="popup-content" class="float-box">
       <div class="card" id="popup-body" style="width: 100%;">
         <div class="card-body">
 
           <div id="popup-header">
             <div id="popup-header-text">
-              <h4 class="card-title" id="container-name">Basilica di S. Domenico</h4>
-              <p class="card-subtitle" id="non-existing-place-text">Sito non più esistente</p>
+              <div id="popup-title-row">
+                <h4 class="card-title" id="container-name">Basilica di S. Domenico</h4>
+                <a href="#" id="btn-site" target="_blank" rel="noopener" class="popup-site-link">
+                  <i class="fa-solid fa-church"></i>
+                </a>
+              </div>
+              <p class="card-subtitle" id="non-existing-place-text">Non più esistente</p>
             </div>
             <button type="button" class="btn-close" aria-label="Close" onclick="closePopup()"></button>
           </div>
 
           <div id="card-img-container">
-            <img src="assets/images/thumb/san-domenico.jpg" id="card-img">
+            <a href="#" id="btn-site-img" target="_blank" rel="noopener" class="card-img-link">
+              <img src="assets/images/thumb/san-domenico.jpg" id="card-img">
+            </a>
           </div>
 
           <div id="catalogue-links">
 
-            <p class="legend-title">Dal catalogo della Fondazione Zeri</p>
-
-            <p class="card-text">Esplora le opere qui documentate nel corso dei secoli</p>
+            <p class="legend-title">Opere nel catalogo della Fondazione Zeri</p>
 
             <div class="row">
               <div class="col-6 btn-catalog-container" id="btn-ldcn-container">
-                <a href="#" class="btn btn-primary" id="btn-ldcn">Collocazione attuale</a>
+                <a href="#" class="btn btn-primary" id="btn-ldcn">Tuttora in loco</a>
               </div>
               <div class="col-6 btn-catalog-container" id="btn-prcd-container">
-                <a href="#" class="btn btn-secondary" id="btn-prcd">Collocazione precedente</a>
+                <a href="#" class="btn btn-secondary" id="btn-prcd">Spostate o distrutte</a>
               </div>
             </div>
           </div>
 
-          <div id="site-links" class="row mt-3">
-            <!--p class="legend-title mt-3" id="title-site-section">Il sito</p-->
-            <p class="card-text" id="site-description">Leggi la scheda di questo luogo di culto</p>
-            <div class="btn-site-container col-6">
-              <a href="#" class="btn btn-outline-primary w-100" id="btn-site">Il sito nel catalogo</a>
-            </div>
-          </div>
 
           <div id="additional-links">
             <p class="legend-title mt-4">Altre risorse</p>
@@ -204,35 +214,22 @@
   <!-- Offcanvas info -->
   <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas-info" aria-labelledby="offcanvas-info-label">
     <div class="offcanvas-header">
-      <h4 class="offcanvas-title" id="offcanvas-info-label">Il patrimonio ecclesiastico di Bologna nelle fotografie di
-        Mario Berardi</h4>
+      <h4 class="offcanvas-title" id="offcanvas-info-label">Il patrimonio ecclesiastico di Bologna nelle fotografie della Fondazione Zeri</h4>
       <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Chiudi"></button>
     </div>
     <div class="offcanvas-body">
 
       <section class="info-section">
-        <h5>Mario Berardi e la documentazione del patrimonio bolognese</h5>
         <p>
-          L'Archivio Mario Berardi è composto da 5.379 fototipi, per la maggior parte diacolor (3253), negativi bn
-          (1.604) e positivi alla gelatina ai sali d’argento (297). A questi si aggiungono anche negativi (88) e
-          positivi (37) a colori. In alcune buste, insieme ai fototipi, sono contenuti cd-rom con fotografie in formato
-          digitale, per un totale di oltre 1000 files (jpg e tiff).
+          L’archivio fotografico della Fondazione Zeri conserva una ricca documentazione su edifici di culto e opere conservate (o già conservate) nelle chiese di Bologna. Le fotografie appartengono a diversi fondi e testimoniano spostamenti, restauri, rimozioni e perdite avvenute nel corso del tempo.<br>Il sistema di catalogazione adottato permette di collegare tra loro tutte le immagini di una stessa opera, offrendo dati specifici anche sugli oggetti fotografici.
         </p>
 
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-          est laborum.
+          Tra le immagini più recenti sono quelle di Mario Berardi (Bologna, 1946 - ), fotografo professionista che ha lavorato a lungo per Soprintendenze, enti ecclesiastici, case editrici e che nel 2013 ha donato il suo archivio alla Fondazione. Tra i 5.379 fototipi che lo compongono, ne sono stati recentemente schedati oltre un migliaio: diacolor e fotografie digitali, selezionati per completare o arricchire la documentazione inclusa nei fondi <a href="https://catalogo.fondazionezeri.unibo.it/scheda.livello.jsp?decorator=layout_resp&apply=true&locale=it&id=9&tipo_scheda=fondo">Supino</a>, <a href="</a>">Croci</a>, <a href="https://fondazionezeri.unibo.it/it/fototeca/altri-fondi/fototeca-adriano-cera">Cera</a>, più antica e tendenzialmente in bianco e nero.
         </p>
 
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-          est laborum.
+          Le fotografie di Berardi sulle chiese di Bologna e sui tesori in esse contenuti sono state realizzate dagli anni Novanta in poi, soprattutto nell’ambito del progetto di inventariazione dei beni mobili di proprietà ecclesiastica promosso dalla C.E.I.
         </p>
       </section>
 
@@ -243,18 +240,18 @@
           <li>L'Archivio Mario Berardi nella Fototeca Zeri. <a
               href="https://catalogo.fondazionezeri.unibo.it/scheda.livello.jsp?decorator=layout_resp&apply=true&locale=it&id=4&tipo_scheda=fondo">Link</a>.
           </li>
-          <li>. . .</li>
         </ul>
         </p>
       </section>
 
       <section class="info-section">
         <h5>Crediti</h5>
-        <p>I dati relativi alla campagna fotografica provengono dal <a
+        <p>I dati provengono dal <a
             href="https://catalogo.fondazionezeri.unibo.it/">database della Fondazione Zeri</a>.</p>
         <p>Il progetto è stato realizzato dalla <a href="https://fondazionezeri.unibo.it/it">Fondazione Federico
             Zeri</a> - Università di Bologna e finanziato dalla <a href="https://fondazionecarisbo.it/">Fondazione Cassa
-            di Risparmio di Bologna</a>. Il codice, rilasciato con licenza CC-BY 4.0, è reperibile nell'apposita <a
+            di Risparmio di Bologna</a>, in accordo con l’<a href="https://www.chiesadibologna.it/">Arcidiocesi di Bologna</a>.</p> 
+        <p>Il codice, rilasciato con licenza CC-BY 4.0, è reperibile nell'apposita <a
             href="https://github.com/FondazioneFedericoZeri/carisbo">repository</a> su GitHub.</p>
       </section>
 
@@ -264,13 +261,13 @@
   <!-- Intro modal: static backdrop, shown on hero lift -->
   <div class="modal fade" id="modal-intro" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="modal-intro-label" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-dialog-centered modal-carisbo">
       <div class="modal-content">
         <div class="modal-body">
-          <h5 class="modal-title mb-3" id="modal-intro-label">Una nuova esplorazione del catalogo Zeri</h5>
-          <p>La Fondazione Zeri ti dà il benvenuto in questo nuovo progetto per esplorare le opere del patrimonio ecclesiastico bolognese documentate nel proprio catalogo.</p>
-          <p>Questa applicazione propone un mappa interattiva dove si potranno creare nuovi itinerari fra vari edifici di culto della città di Bologna, scoprire le opere appartenenti a questi contesti e approfondire i siti più importanti.</p>
-          <p>Il progetto, finanziato dalla Fondazione Carisbo, vuole rendere disponibile al più vasto pubblico l'archivio del fotografo bolognese <a href="https://catalogo.fondazionezeri.unibo.it/scheda.livello.jsp?decorator=layout_resp&apply=true&locale=it&id=4&tipo_scheda=fondo">Mario Berardi</a>, recentemente schedato dal team della Fondazione.</p>
+          <h5 class="modal-title mb-3" id="modal-intro-label">Una nuova modalità di fruizione del catalogo Zeri</h5>
+          <p>La Fondazione Federico Zeri presenta una nuova visualizzazione dedicata al patrimonio ecclesiastico bolognese schedato nel proprio catalogo.</p>
+          <p>Una mappa interattiva consente di individuare luoghi di culto differenti, ancora esistenti o scomparsi, di accedere alle informazioni sugli edifici e sulle opere d’arte, sia quelle tuttora conservate in loco, sia quelle distrutte, rimosse o musealizzate.</p>
+          <p>Grazie al contributo della Fondazione Carisbo, la documentazione sul patrimonio cittadino è stata arricchita dalle fotografie dell’archivio professionale di <a href="https://catalogo.fondazionezeri.unibo.it/scheda.livello.jsp?decorator=layout_resp&apply=true&locale=it&id=4&tipo_scheda=fondo">Mario Berardi</a>, recentemente schedato dal team della Fondazione.</p>
           <div class="justify-content-end d-flex mt-3">
             <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Esplora la mappa</button>
           </div>
@@ -279,15 +276,15 @@
     </div>
   </div>
 
-  <!-- FAB circular button modal -->
-  <div class="modal fade" id="modal-fab" tabindex="-1" aria-labelledby="modal-fab-label" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
+  <!-- float circular button modal -->
+  <div class="modal fade" id="modal-float" tabindex="-1" aria-labelledby="modal-float-label" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-carisbo">
       <div class="modal-content">
         <div class="modal-body">
-          <h5 class="modal-title mb-3" id="modal-fab-label">Istruzioni per la navigazione</h5>
-          <p>La mappa interattiva può essere esplorata per scoprire e approfondire le opere e i luoghi di culto bolognesi documentati nel catalogo. È possibile ampliare e ridurre l'area visualizzata da mouse e tramite i pulsanti in alto a destra.</p>
-          <p>I segnaposto riportati indicano uno specifico luogo di culto; il colore associa ogni contesto con la categoria riportata nella legenda interrattiva. Cliccando sui segnaposti è possibile scoprire informazioni dettagliate su ciascun luogo e sulle opere in esso documentate (attualmente o in passato).</p>
-          <p>Il pulsante in alto a sinistra permette di accedere a informazioni più dettagliate sul progetto, nonché su Mario Berardi, la sua attività e il suo fondo fotografico.</p>
+          <h5 class="modal-title mb-3" id="modal-float-label">Istruzioni per la navigazione</h5>
+          <p>La mappa interattiva può essere esplorata per scoprire le opere e i luoghi di culto bolognesi documentati nel catalogo. È possibile ampliare e ridurre l'area visualizzata tramite mouse e pulsanti in alto a destra.</p>
+          <p>I segnaposto indicano uno specifico edificio; il colore associa ogni contesto con la categoria riportata nella legenda interattiva. Cliccando sui segnaposto si apre la scheda di ciascun edificio da cui si ha accesso alle opere che sono attualmente ubicate all’interno, o che sono da lì transitate. Ogni scheda è illustrata da una o più fotografie conservate nei diversi fondi della fototeca. Per approfondire la storia del sito sono offerti link a risorse esterne significative per la storia del patrimonio ecclesiastico cittadino.</p>
+          <p>Il pulsante in alto a sinistra permette di accedere a informazioni più dettagliate sul progetto, sull’archivio fotografico della Fondazione Zeri e sul fondo Mario Beradi da cui sono tratte le fotografie a colori e più recenti.</p>
           <div class="justify-content-end d-flex mt-3">
             <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Continua l'esplorazione</button>
           </div>

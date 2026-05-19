@@ -108,9 +108,16 @@ function setActiveMarker(marker) {
 function applyFilter() {
   clusterGroup.clearLayers();
   const showNonEsistente = activeCategories.has('Non più esistente');
+  const onlyNonEsistente = showNonEsistente &&
+    [...activeCategories].every(function (c) { return c === 'Non più esistente'; });
+
   allMarkers.forEach(function (item) {
-    if (!activeCategories.has(item.cat)) return;
-    if (item.nonEsistente && !showNonEsistente) return;
+    if (item.nonEsistente) {
+      if (!showNonEsistente) return;
+      if (!onlyNonEsistente && !activeCategories.has(item.cat)) return;
+    } else {
+      if (!activeCategories.has(item.cat)) return;
+    }
     clusterGroup.addLayer(item.marker);
   });
 }
@@ -138,7 +145,7 @@ function initChipFilters() {
 // used for "Non più esistente" markers.
 function nonEsistenteIcon(color) {
   return L.divIcon({
-    html: '<div class="place-marker--ex" style="background:' + color + '"><i class="bi bi-asterisk"></i></div>',
+    html: '<div class="place-marker--ex" style="background:' + color + '"><i class="fa-solid fa-asterisk"></i></div>',
     className: '',
     iconSize: [18, 18],
     iconAnchor: [9, 9],
@@ -190,6 +197,10 @@ gl.getMaplibreMap().on('style.load', function () {
         ]],
       ]);
     }
+    // Hide hospital / medical area fills (pink background on the basemap)
+    if (/hospital|medical|healthcare/i.test(layer.id)) {
+      glMap.setLayoutProperty(layer.id, 'visibility', 'none');
+    }
   });
 });
 
@@ -207,10 +218,10 @@ function initMarkers() {
     zoomToBoundsOnClick: true,
     iconCreateFunction: function (_cluster) {
       return L.divIcon({
-        html: '<div class="cluster-icon"></div>',
+        html: '<div class="cluster-icon"><i class="fa-solid fa-plus"></i></div>',
         className: '',
-        iconSize: [16, 16],
-        iconAnchor: [8, 8],
+        iconSize: [28, 28],
+        iconAnchor: [14, 14],
       });
     },
   });
@@ -294,11 +305,12 @@ function initMarkers() {
 
       // Il sito (Scheda_Chiesa)
       if (place.Scheda_Chiesa) {
-        //document.getElementById('title-site-section').textContent = place.Contenitore;
         document.getElementById('btn-site').href = place.Scheda_Chiesa;
-        document.getElementById('site-links').style.display = 'block';
+        document.getElementById('btn-site').style.display = 'inline-flex';
+        document.getElementById('btn-site-img').href = place.Scheda_Chiesa;
       } else {
-        document.getElementById('site-links').style.display = 'none';
+        document.getElementById('btn-site').style.display = 'none';
+        document.getElementById('btn-site-img').href = '#';
       }
 
       // Additional resources
@@ -327,7 +339,7 @@ function initMarkers() {
 
         for (const [label, url] of Object.entries(linksAddtional)) {
           if (!isLinkBlank(url)) {
-            document.getElementById('link-list').innerHTML += `<li><a href="${url}" target="_blank">${label} <i class="bi bi-box-arrow-up-right"></i></a></li>`;
+            document.getElementById('link-list').innerHTML += `<li><a href="${url}" target="_blank">${label} <i class="fa-solid fa-arrow-up-right-from-square"></i></a></li>`;
           }
         }
 
@@ -336,8 +348,8 @@ function initMarkers() {
 
       // ==================================
 
-      document.getElementById('ui-fab-popup').classList.add('visible');
-      document.getElementById('ui-fab-top').classList.remove('visible');
+      document.getElementById('ui-float-popup').classList.add('visible');
+      document.getElementById('ui-float-top').classList.remove('visible');
     });
 
     allMarkers.push({ marker: marker, cat: isNonEsistente(place) ? primaryCat(place) : place.Categoria, nonEsistente: isNonEsistente(place) });
@@ -349,18 +361,19 @@ function initMarkers() {
 }
 
 function closePopup() {
-  document.getElementById('ui-fab-popup').classList.remove('visible');
-  document.getElementById('ui-fab-top').classList.add('visible');
+  document.getElementById('ui-float-popup').classList.remove('visible');
+  document.getElementById('ui-float-top').classList.add('visible');
   setActiveMarker({});
 }
 
 // ── Hero button ───────────────────────────────────────────────────
 document.getElementById('btn').addEventListener('click', function () {
   const hero = document.getElementById('hero');
-  const fab = document.getElementById('ui-fab-top');
+  const float = document.getElementById('ui-float-top');
 
   hero.classList.add('up');
-  fab.classList.add('visible');
+  float.classList.add('visible');
+  document.getElementById('ui-float-logos').classList.add('visible');
 
   // Show intro modal after the hero has finished lifting (1.1s transition)
   setTimeout(function () {

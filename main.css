@@ -195,7 +195,7 @@ body {
 }
 
 /* ── Floating action buttons (top-left) ── */
-.fab {
+.float {
   position: fixed;
   z-index: 1000;
   display: flex;
@@ -208,24 +208,51 @@ body {
   transition: opacity 0.25s ease, visibility 0.25s ease, transform 0.25s ease;
 }
 
-.fab.visible {
+.float.visible {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
 }
 
-#ui-fab-top {
+#ui-float-top {
   top: 24px;
   left: 24px;
   transform: translateY(-6px);
 }
 
-#ui-fab-top.visible {
+#ui-float-top.visible {
   transform: translateY(0);
 }
 
+#ui-float-logos {
+  top: 20px;
+  left: 50%;
+  transform: translate(-50%, -6px);
+  flex-direction: row;
+  gap: 12px;
+}
+
+#ui-float-logos.visible {
+  transform: translate(-50%, 0);
+}
+
+#ui-float-logos .hero-logo-link img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+#ui-float-logos .hero-logo-link {
+  outline-color: rgba(0, 0, 0, 0.15);
+}
+
+#ui-float-logos .hero-logo-link:hover {
+  outline-color: rgba(0, 0, 0, 0.4);
+}
+
 /* Shared surface style for pill */
-.fab-pill {
+.float-pill {
   background: var(--surface);
   border: 1px solid var(--border);
   box-shadow: 0 2px 16px rgba(0, 0, 0, 0.12);
@@ -236,14 +263,14 @@ body {
   transition: background 0.15s, color 0.15s, border-color 0.15s;
 }
 
-.fab-pill:hover {
+.float-pill:hover {
   background: var(--bg-chip);
   color: var(--zeri-blue-dark);
   border-color: #c9ddf0;
 }
 
 /* ── Info pill (CTA style) ── */
-.fab-pill {
+.float-pill {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -255,31 +282,31 @@ body {
   font-weight: 500;
 }
 
-.fab-pill i {
+.float-pill i {
   font-size: 18px;
   flex-shrink: 0;
 }
 
-.fab-pill-title {
+.float-pill-title {
   font-size: var(--text-base);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.fab-pill--cta {
-  width: calc(300px + 10px + 44px); /*Sum of below fabs + gap*/
+.float-pill--cta {
+  width: calc(300px + 10px + 44px); /*Sum of below floats + gap*/
   height: 52px;
   padding: 0 16px 0 22px;
   font-size: var(--text-lg);
 }
 
-.fab-pill--cta .fab-pill-title {
+.float-pill--cta .float-pill-title {
   font-size: var(--text-lg);
   font-weight: 500;
 }
 
-.fab-box {
+.float-box {
   background: var(--surface);
   border: 1px solid var(--border);
   box-shadow: 0 2px 16px rgba(0, 0, 0, 0.12);
@@ -290,18 +317,18 @@ body {
   color: var(--text-primary);
 }
 
-/* ── Legend FAB: always visible ── */
-#legend-fab {
+/* ── Legend float: always visible ── */
+#legend-float {
   width: 300px;
   border-radius: 16px;
 }
 
-#legend-fab-header {
+#legend-float-header {
   display: flex;
   align-items: center;
 }
 
-#legend-fab-icon {
+#legend-float-icon {
   width: 44px;
   height: 44px;
   display: flex;
@@ -312,22 +339,22 @@ body {
   color: var(--zeri-blue-dark);
 }
 
-#legend-fab-header .legend-title {
+#legend-float-header .legend-title {
   margin: 0;
 }
 
-#fab-row {
+#float-row {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   gap: 10px;
 }
 
-#legend-fab-body {
+#legend-float-body {
   padding: 0 14px 14px;
 }
 
-#legend-fab-body .chip-list {
+#legend-float-body .chip-list {
   margin-bottom: 0;
 }
 
@@ -372,9 +399,9 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 8px;
-  color: #fff;
-  line-height: 1;
+  font-size: 10px;
+  color: black;
+  line-height: 1.5;
 }
 
 .chip-label {
@@ -384,8 +411,8 @@ body {
   white-space: nowrap;
 }
 
-/* ── Circular FAB button (3rd element in ui-fab-top) ── */
-.fab-circle-btn {
+/* ── Circular float button (3rd element in ui-float-top) ── */
+.float-circle-btn {
   width: 44px;
   height: 44px;
   border-radius: 50%;
@@ -404,7 +431,7 @@ body {
   transition: background 0.15s, color 0.15s, border-color 0.15s;
 }
 
-.fab-circle-btn:hover {
+.float-circle-btn:hover {
   background: var(--bg-chip);
   color: var(--zeri-blue-dark);
   border-color: #c9ddf0;
@@ -426,7 +453,7 @@ body {
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.30);
 }
 
-.place-marker--ex .bi-asterisk {
+.place-marker--ex .fa-asterisk {
   font-size: 7px;
   color: #fff;
   line-height: 1;
@@ -450,12 +477,21 @@ path.active-marker {
 
 /* ── Marker cluster icon ── */
 .cluster-icon {
-  width: 16px;
-  height: 16px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   background: #fff;
   border: 1.5px solid rgba(0, 0, 0, 0.55);
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cluster-icon .fa-plus {
+  font-size: 18px;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.65);
 }
 
 /* ── Filter chip states ── */
@@ -471,13 +507,13 @@ path.active-marker {
 
 /* ── Floating popup panel (bottom-left) ── */
 
-#ui-fab-popup {
+#ui-float-popup {
   bottom: 24px;
   left: 24px;
   transform: translateY(6px);
 }
 
-#ui-fab-popup.visible {
+#ui-float-popup.visible {
   transform: translateY(0);
 }
 
@@ -496,25 +532,52 @@ path.active-marker {
 #popup-header {
   display: flex;
   align-items: flex-start;
-  justify-content: space-between;
   gap: 8px;
   margin-bottom: 0.5rem;
 }
 
-#popup-close {
+#popup-header-text {
+  flex: 1;
+  min-width: 0;
+}
+
+#popup-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.popup-site-link {
   flex-shrink: 0;
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: var(--text-muted);
-  font-size: 1rem;
+  display: inline-flex;
+  align-items: center;
+  color: var(--zeri-blue-dark);
+  font-size: 1.35rem;
+  text-decoration: none;
   line-height: 1;
-  padding: 2px;
   transition: color 0.15s;
 }
 
-#popup-close:hover {
-  color: var(--text-primary);
+.popup-site-link:hover {
+  color: var(--zeri-blue);
+}
+
+.card-img-link {
+  display: flex;
+  cursor: pointer;
+}
+
+.card-img-link[href="#"] {
+  pointer-events: none;
+  cursor: default;
+}
+
+.card-img-link img {
+  transition: opacity 0.15s;
+}
+
+.card-img-link:not([href="#"]):hover img {
+  opacity: 0.85;
 }
 
 #non-existing-place-text {
@@ -596,18 +659,58 @@ path.active-marker {
   --bs-btn-disabled-border-color:var(--zeri-btn-sec);
 }
 
+.modal-carisbo {
+  --bs-modal-width: min(900px, calc(100vw - 2 * var(--bs-modal-margin, 0.5rem)));
+}
+
 /* ── Smartphone ── */
 @media (max-width: 576px) {
-  #ui-fab-top {
+  #ui-float-top {
     top: 12px;
     left: 12px;
   }
 
-  #legend-fab {
-    width: calc(100vw - 24px);
+  /* CTA pill: full viewport width */
+  .float-pill--cta {
+    width: calc(60vw);
   }
 
-  #ui-fab-popup {
+  /* Legend float: collassa a icona, si espande al tap/hover */
+  #legend-float {
+    width: 44px;
+    border-radius: 50%;
+    transition: width 0.22s ease 0.15s, border-radius 0.22s ease 0.15s;
+  }
+
+  #legend-float:hover {
+    width: min(300px, calc(100vw - 78px)); /* 78 = left 12 + right 12 + circle 44 + gap 10 */
+    border-radius: 16px;
+    transition: width 0.2s ease, border-radius 0.2s ease;
+  }
+
+  #legend-float-icon {
+    color: var(--text-primary);
+  }
+
+  #legend-float:hover #legend-float-icon {
+    color: var(--zeri-blue-dark);
+  }
+
+  #legend-float-body {
+    max-height: 0;
+    overflow: hidden;
+    padding-top: 0;
+    padding-bottom: 0;
+    transition: max-height 0.15s ease, padding 0.15s ease;
+  }
+
+  #legend-float:hover #legend-float-body {
+    max-height: 300px;
+    padding-bottom: 14px;
+    transition: max-height 0.3s ease 0.08s, padding 0.3s ease 0.08s;
+  }
+
+  #ui-float-popup {
     left: 12px;
     bottom: 12px;
   }
@@ -618,5 +721,22 @@ path.active-marker {
 
   #card-img {
     max-height: 160px;
+  }
+
+  #ui-float-logos {
+    top: auto;
+    bottom: 12px;
+    transform: translate(-50%, 6px);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.12);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 999px;
+    padding: 8px 16px;
+  }
+
+  #ui-float-logos.visible {
+    transform: translate(-50%, 0);
   }
 }
