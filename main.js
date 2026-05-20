@@ -56,7 +56,7 @@ fetch('assets/data.csv')
     console.error('Impossibile caricare data.csv:', err);
   });
 
-// ── Category → fill colour (reads directly from :root CSS variables) ─
+// ── Category: fill with colour from :root CSS variables ─
 const _css = getComputedStyle(document.documentElement);
 const CATEGORY_COLORS = {
   'Chiese':                 _css.getPropertyValue('--col-church').trim(),
@@ -250,7 +250,7 @@ function initMarkers() {
       });
     }
 
-    // Embed the ID on the marker — will be used by the detail panel
+    // Embed the ID on the marker — will be used by the popup panel
     marker.placeId = place.ID;
 
     // Event on marker click: open popup (with costum content) and set active marker styling
@@ -280,7 +280,7 @@ function initMarkers() {
         document.getElementById('card-img-container').style.display = 'none';
       }
 
-      // Le opere nel contesto (LDCN, PRCD)
+      // Artworks documented in the site (LDCN, PRCD)
       const hasCatalogLinks = place.LDCN !== "" || place.PRCD !== "";
 
       if (hasCatalogLinks) {
@@ -303,7 +303,7 @@ function initMarkers() {
         document.getElementById('catalogue-links').style.display = 'none';
       }
 
-      // Il sito (Scheda_Chiesa)
+      // Button for entry of the site
       if (place.Scheda_Chiesa) {
         document.getElementById('btn-site').href = place.Scheda_Chiesa;
         document.getElementById('btn-site').style.display = 'inline-flex';
