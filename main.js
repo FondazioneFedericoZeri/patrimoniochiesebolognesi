@@ -253,6 +253,13 @@ function initMarkers() {
     // Embed the ID on the marker — will be used by the popup panel
     marker.placeId = place.ID;
 
+    marker.bindTooltip(place.Contenitore, {
+      className: 'leaflet-tooltip',
+      direction: 'top',
+      offset: [0, -10],
+      opacity: 0.97
+    });
+
     // Event on marker click: open popup (with costum content) and set active marker styling
     marker.on('click', function (e) {
       L.DomEvent.stopPropagation(e);

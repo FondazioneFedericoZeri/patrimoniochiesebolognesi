@@ -505,6 +505,11 @@ path.active-marker {
   opacity: 0.32;
 }
 
+/* ── Tooltip ── */
+.leaflet-tooltip {
+  font-family: var(--font-sans);
+}
+
 /* ── Floating popup panel (bottom-left) ── */
 
 #ui-float-popup {
