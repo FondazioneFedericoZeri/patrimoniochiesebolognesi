@@ -224,31 +224,65 @@ body {
   transform: translateY(0);
 }
 
-#ui-float-logos {
-  top: 20px;
-  left: 50%;
-  transform: translate(-50%, -6px);
+/* ── Hero footer (bottom row: copyright + btn + sponsor logos) ── */
+#hero-footer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  width: 100%;
+  gap: 1rem;
+}
+
+#hero-copyright {
+  flex: 1;
+}
+
+#hero-copyright p {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  color: rgba(255, 255, 255, 0.65);
+  margin: 0;
+  text-align: left;
+}
+
+#hero-sponsor-logos {
+  flex: 1;
+  display: flex;
   flex-direction: row;
-  gap: 12px;
+  align-items: flex-end;
+  justify-content: flex-end;
+  gap: 16px;
 }
 
-#ui-float-logos.visible {
-  transform: translate(-50%, 0);
+.hero-sponsor-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
 }
 
-#ui-float-logos .hero-logo-link img {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  object-fit: cover;
+.hero-sponsor-label {
+  font-family: var(--font-sans);
+  font-size: 0.62rem;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
 
-#ui-float-logos .hero-logo-link {
-  outline-color: rgba(0, 0, 0, 0.15);
+.hero-sponsor-img {
+  max-height: 42px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+  transition: opacity 0.15s;
 }
 
-#ui-float-logos .hero-logo-link:hover {
-  outline-color: rgba(0, 0, 0, 0.4);
+.hero-sponsor-item a {
+  display: flex;
+}
+
+.hero-sponsor-item a:hover .hero-sponsor-img {
+  opacity: 0.75;
 }
 
 /* Shared surface style for pill */
@@ -409,6 +443,13 @@ body {
   font-size: var(--text-sm);
   color: #333;
   white-space: nowrap;
+}
+
+/* ── Left column: stacks the two circular buttons vertically ── */
+#float-left-col {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 /* ── Circular float button (3rd element in ui-float-top) ── */
@@ -664,6 +705,32 @@ path.active-marker {
   --bs-btn-disabled-border-color:var(--zeri-btn-sec);
 }
 
+/* ── Sites list modal ── */
+.site-list-item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--border);
+  padding: 10px 6px;
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s, padding-left 0.12s;
+}
+
+.site-list-item:hover {
+  background: var(--bg-chip);
+  color: var(--zeri-blue-dark);
+  padding-left: 12px;
+}
+
+.site-list-item:last-child {
+  border-bottom: none;
+}
+
 .modal-carisbo {
   --bs-modal-width: min(900px, calc(100vw - 2 * var(--bs-modal-margin, 0.5rem)));
 }
@@ -728,20 +795,13 @@ path.active-marker {
     max-height: 160px;
   }
 
-  #ui-float-logos {
-    top: auto;
-    bottom: 12px;
-    transform: translate(-50%, 6px);
-    background: var(--surface);
-    border: 1px solid var(--border);
-    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.12);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border-radius: 999px;
-    padding: 8px 16px;
+  .hero-sponsor-img {
+    max-height: 22px;
   }
 
-  #ui-float-logos.visible {
-    transform: translate(-50%, 0);
+  #hero-sponsor-logos {
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
   }
 }

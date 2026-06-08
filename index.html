@@ -49,9 +49,6 @@
       <a href="https://fondazionezeri.unibo.it/it" target="_blank" rel="noopener" class="hero-logo-link">
         <img src="assets/images/logo-zeri-square.jpg" alt="Fondazione Federico Zeri" />
       </a>
-      <a href="https://fondazionecarisbo.it/" target="_blank" rel="noopener" class="hero-logo-link">
-        <img src="assets/images/logo-carisbo-square.jpg" alt="Fondazione Carisbo" />
-      </a>
     </div>
 
     <div id="hero-center">
@@ -59,24 +56,31 @@
       <p>Esplora il patrimonio ecclesiastico bolognese nelle fotografie della Fondazione Zeri</p>
     </div>
 
-    <button id="btn" aria-label="Inizia">&#8595;</button>
+    <div id="hero-footer">
+      <div id="hero-copyright">
+        <p>©Mario Berardi</p>
+      </div>
+      <button id="btn" aria-label="Inizia">&#8595;</button>
+      <div id="hero-sponsor-logos">
+        <div class="hero-sponsor-item">
+          <span class="hero-sponsor-label">con il contributo di</span>
+          <a href="https://fondazionecarisbo.it/" target="_blank" rel="noopener">
+            <img src="assets/images/logo-carisbo-a-bandiera.jpg" alt="Fondazione Carisbo" class="hero-sponsor-img" />
+          </a>
+        </div>
+        <div class="hero-sponsor-item">
+          <span class="hero-sponsor-label">con il patrocinio di</span>
+          <a href="https://www.chiesadibologna.it/" target="_blank" rel="noopener">
+            <img src="assets/images/logo-diocesi.png" alt="Arcidiocesi di Bologna" class="hero-sponsor-img" />
+          </a>
+        </div>
+      </div>
+    </div>
 
   </div>
 
 
   <div id="map"></div>
-
-  <!-- Floating logos (top-center) -->
-  <div>
-    <div id="ui-float-logos" class="float">
-      <a href="https://fondazionezeri.unibo.it/it" target="_blank" rel="noopener" class="hero-logo-link">
-        <img src="assets/images/logo-zeri-square.jpg" alt="Fondazione Federico Zeri" />
-      </a>
-      <a href="https://fondazionecarisbo.it/" target="_blank" rel="noopener" class="hero-logo-link">
-        <img src="assets/images/logo-carisbo-square.jpg" alt="Fondazione Carisbo" />
-      </a>
-    </div>
-  </div>
 
   <!-- Floating UI controls (top-left) -->
   <div id="ui-float-top" class="float">
@@ -91,10 +95,16 @@
     <!-- Legend float + info button, same row -->
     <div id="float-row">
 
-      <!-- Circular button → modal -->
-      <button class="float-circle-btn" id="btn-float-modal" data-bs-toggle="modal" data-bs-target="#modal-float">
-        <i class="fa-solid fa-question"></i>
-      </button>
+      <div id="float-left-col">
+        <!-- Magnifying glass → sites list modal -->
+        <button class="float-circle-btn" id="btn-sites-modal" data-bs-toggle="modal" data-bs-target="#modal-sites">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+        <!-- Circular button → info modal -->
+        <button class="float-circle-btn" id="btn-float-modal" data-bs-toggle="modal" data-bs-target="#modal-float">
+          <i class="fa-solid fa-question"></i>
+        </button>
+      </div>
 
           <div id="legend-float" class="float-box">
         <div id="legend-float-header">
@@ -222,14 +232,15 @@
       <section class="info-section">
         <p>
           L’archivio fotografico della Fondazione Zeri conserva una ricca documentazione su edifici di culto e opere conservate (o già conservate) nelle chiese di Bologna. Le fotografie appartengono a diversi fondi e testimoniano spostamenti, restauri, rimozioni e perdite avvenute nel corso del tempo.<br>Il sistema di catalogazione adottato permette di collegare tra loro tutte le immagini di una stessa opera, offrendo dati specifici anche sugli oggetti fotografici.
+
         </p>
 
         <p>
-          Tra le immagini più recenti sono quelle di Mario Berardi (Bologna, 1946 - ), fotografo professionista che ha lavorato a lungo per Soprintendenze, enti ecclesiastici, case editrici e che nel 2013 ha donato il suo archivio alla Fondazione. Tra i 5.379 fototipi che lo compongono, ne sono stati recentemente schedati oltre un migliaio: diacolor e fotografie digitali, selezionati per completare o arricchire la documentazione inclusa nei fondi <a href="https://catalogo.fondazionezeri.unibo.it/scheda.livello.jsp?decorator=layout_resp&apply=true&locale=it&id=9&tipo_scheda=fondo">Supino</a>, <a href="https://catalogo.fondazionezeri.unibo.it/scheda.livello.jsp?decorator=layout_resp&apply=true&locale=it&tipo_scheda=fondo&id=17">Croci</a>, <a href="https://catalogo.fondazionezeri.unibo.it/scheda.livello.jsp?decorator=layout_resp&apply=true&locale=it&tipo_scheda=fondo&id=19">Cera</a>, più antica e tendenzialmente in bianco e nero.
+          Recentemente il catalogo online è stato integrato con le immagini del fotografo Mario Berardi (Bologna, 1946 -), che ha lavorato a lungo per Soprintendenze, enti ecclesiastici, case editrici e che nel 2013 ha donato il suo archivio alla Fondazione.<br>Tra i 5.379 fototipi che lo compongono, sono stati schedati oltre un migliaio di esemplari, in particolare diacolor e fotografie digitali, selezionati per completare o arricchire la documentazione inclusa nei fondi <a href="https://catalogo.fondazionezeri.unibo.it/scheda.livello.jsp?decorator=layout_resp&apply=true&locale=it&id=9&tipo_scheda=fondo">Supino</a>, <a href="https://catalogo.fondazionezeri.unibo.it/scheda.livello.jsp?decorator=layout_resp&apply=true&locale=it&tipo_scheda=fondo&id=17">Croci</a>, <a href="https://catalogo.fondazionezeri.unibo.it/scheda.livello.jsp?decorator=layout_resp&apply=true&locale=it&tipo_scheda=fondo&id=19">Cera</a>, più antica e tendenzialmente in bianco e nero.
         </p>
 
         <p>
-          Le fotografie di Berardi sulle chiese di Bologna e sui tesori in esse contenuti sono state realizzate dagli anni Novanta in poi, soprattutto nell’ambito del progetto di inventariazione dei beni mobili di proprietà ecclesiastica promosso dalla C.E.I.
+          Le fotografie di Berardi sono state realizzate dagli anni Novanta in poi, soprattutto nell’ambito del progetto di inventariazione dei beni mobili di proprietà ecclesiastica promosso dalla C.E.I.
         </p>
       </section>
 
@@ -249,8 +260,8 @@
         <p>I dati provengono dal <a
             href="https://catalogo.fondazionezeri.unibo.it/">database della Fondazione Zeri</a>.</p>
         <p>Il progetto è stato realizzato dalla <a href="https://fondazionezeri.unibo.it/it">Fondazione Federico
-            Zeri</a> - Università di Bologna e finanziato dalla <a href="https://fondazionecarisbo.it/">Fondazione Cassa
-            di Risparmio di Bologna</a>, in accordo con l’<a href="https://www.chiesadibologna.it/">Arcidiocesi di Bologna</a>.</p> 
+            Zeri</a> - Università di Bologna.<br>Con il contributo della <a href="https://fondazionecarisbo.it/">Fondazione Cassa
+            di Risparmio di Bologna</a>.<br>Con il patrocinio dell’<a href="https://www.chiesadibologna.it/">Arcidiocesi di Bologna</a>.</p> 
         <p>Il codice, rilasciato con licenza CC-BY 4.0, è reperibile nell'apposita <a
             href="https://github.com/FondazioneFedericoZeri/carisbo">repository</a> su GitHub.</p>
       </section>
@@ -265,12 +276,28 @@
       <div class="modal-content">
         <div class="modal-body">
           <h5 class="modal-title mb-3" id="modal-intro-label">Una nuova modalità di fruizione del catalogo Zeri</h5>
-          <p>La Fondazione Federico Zeri presenta una nuova visualizzazione dedicata al patrimonio ecclesiastico bolognese schedato nel proprio catalogo.</p>
-          <p>Una mappa interattiva consente di individuare luoghi di culto differenti, ancora esistenti o scomparsi, di accedere alle informazioni sugli edifici e sulle opere d’arte, sia quelle tuttora conservate in loco, sia quelle distrutte, rimosse o musealizzate.</p>
-          <p>Grazie al contributo della Fondazione Carisbo, la documentazione sul patrimonio cittadino è stata arricchita dalle fotografie dell’archivio professionale di <a href="https://catalogo.fondazionezeri.unibo.it/scheda.livello.jsp?decorator=layout_resp&apply=true&locale=it&id=4&tipo_scheda=fondo">Mario Berardi</a>, recentemente schedato dal team della Fondazione.</p>
+          <p>La Fondazione Federico Zeri presenta una nuova visualizzazione dedicata al patrimonio ecclesiastico bolognese schedato nel proprio catalogo online.</p>
+          <p>Una mappa interattiva consente di individuare i diversi luoghi di culto, ancora esistenti o scomparsi, di accedere alle informazioni sugli edifici e sulle opere d’arte, sia quelle ancora conservate in loco, sia quelle distrutte, rimosse o musealizzate.</p>
+          <p>Grazie al contributo della Fondazione Carisbo, la documentazione sul patrimonio cittadino è stata arricchita dalle fotografie dell’archivio professionale di <a href="https://catalogo.fondazionezeri.unibo.it/scheda.livello.jsp?decorator=layout_resp&apply=true&locale=it&id=4&tipo_scheda=fondo">Mario Berardi</a>, recentemente schedate dalla Fondazione.</p>
           <div class="justify-content-end d-flex mt-3">
             <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Esplora la mappa</button>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sites list modal -->
+  <div class="modal fade" id="modal-sites" tabindex="-1" aria-labelledby="modal-sites-label" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-carisbo">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modal-sites-label">Tutti i siti</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Chiudi"></button>
+        </div>
+        <div class="modal-body">
+          <input type="text" id="sites-search" class="form-control mb-3" placeholder="Cerca sito...">
+          <div id="modal-sites-body"></div>
         </div>
       </div>
     </div>
@@ -283,8 +310,8 @@
         <div class="modal-body">
           <h5 class="modal-title mb-3" id="modal-float-label">Istruzioni per la navigazione</h5>
           <p>La mappa interattiva può essere esplorata per scoprire le opere e i luoghi di culto bolognesi documentati nel catalogo. È possibile ampliare e ridurre l'area visualizzata tramite mouse e pulsanti in alto a destra.</p>
-          <p>I segnaposto indicano uno specifico edificio; il colore associa ogni contesto con la categoria riportata nella legenda interattiva. Cliccando sui segnaposto si apre la scheda di ciascun edificio da cui si ha accesso alle opere che sono attualmente ubicate all’interno, o che sono da lì transitate. Ogni scheda è illustrata da una o più fotografie conservate nei diversi fondi della fototeca. Per approfondire la storia del sito sono offerti link a risorse esterne significative per la storia del patrimonio ecclesiastico cittadino.</p>
-          <p>Il pulsante in alto a sinistra permette di accedere a informazioni più dettagliate sul progetto, sull’archivio fotografico della Fondazione Zeri e sul fondo Mario Beradi da cui sono tratte le fotografie a colori e più recenti.</p>
+          <p>I segnaposto indicano uno specifico edificio; il colore associa ogni contesto con la categoria riportata nella legenda interattiva. Cliccando sui segnaposto si apre la scheda di ciascun edificio da cui si ha accesso alle opere che sono attualmente ubicate all’interno, o che sono da lì transitate. Ogni scheda è illustrata da una o più fotografie conservate nei diversi fondi della fototeca. Per approfondire la storia degli edifici sono offerti link a risorse esterne significative per la storia del patrimonio ecclesiastico cittadino.</p>
+          <p>Il pulsante <b>Per saperne di più</b> permette di accedere a informazioni dettagliate sul progetto, sull’archivio fotografico della Fondazione Zeri e sul fondo Mario Beradi da cui sono tratte le fotografie a colori e più recenti.</p>
           <div class="justify-content-end d-flex mt-3">
             <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Continua l'esplorazione</button>
           </div>

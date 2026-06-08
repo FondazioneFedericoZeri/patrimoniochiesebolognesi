@@ -204,6 +204,119 @@ gl.getMaplibreMap().on('style.load', function () {
   });
 });
 
+// ── Activate place (shared by marker click and site list) ─────────
+function activatePlace(place, marker) {
+  setActiveMarker(marker);
+
+  document.getElementById('container-name').textContent = place.Contenitore;
+
+  if (isNonEsistente(place)) {
+    document.getElementById('non-existing-place-text').style.display = 'flex';
+  } else {
+    document.getElementById('non-existing-place-text').style.display = 'none';
+  }
+
+  if (place.Path) {
+    document.getElementById('card-img-container').style.display = 'flex';
+    document.querySelector('#card-img').src = 'assets/images/thumb/' + place.Path;
+  } else {
+    document.getElementById('card-img-container').style.display = 'none';
+  }
+
+  const hasCatalogLinks = place.LDCN !== '' || place.PRCD !== '';
+  if (hasCatalogLinks) {
+    if (place.LDCN) {
+      document.getElementById('btn-ldcn-container').style.display = 'inline-flex';
+      document.getElementById('btn-ldcn').href = place.LDCN;
+    } else {
+      document.getElementById('btn-ldcn-container').style.display = 'none';
+    }
+    if (place.PRCD) {
+      document.getElementById('btn-prcd-container').style.display = 'inline-flex';
+      document.getElementById('btn-prcd').href = place.PRCD;
+    } else {
+      document.getElementById('btn-prcd-container').style.display = 'none';
+    }
+    document.getElementById('catalogue-links').style.display = 'block';
+  } else {
+    document.getElementById('catalogue-links').style.display = 'none';
+  }
+
+  if (place.Scheda_Chiesa) {
+    document.getElementById('btn-site').href = place.Scheda_Chiesa;
+    document.getElementById('btn-site').style.display = 'inline-flex';
+    document.getElementById('btn-site-img').href = place.Scheda_Chiesa;
+  } else {
+    document.getElementById('btn-site').style.display = 'none';
+    document.getElementById('btn-site-img').href = '#';
+  }
+
+  const isLinkBlank = function(link) { return link === '' || link === undefined; };
+  const linksAdditional = {
+    'Storia e Memoria di Bologna': place.Link_StorieMemorie,
+    'Origine di Bologna': place.Link_OrigineBologna,
+    'Biblioteca Salaborsa': place.Link_BibSalaBorsa,
+    'Wikipedia': place.Link_Wiki,
+    'Genus Bononiae': place.Link_GenusBononiae,
+    'Centro Studi \'Gina Fasoli\'': place.Link_CentroFasoli,
+    'Biblioteca Comunale dell\'Archiginnasio': place.Link_Archiginnasio,
+    'Fondazione Cassa di Risparmio in Bologna': place.Link_Carisbo,
+    'Beni Ecclesiastici in Web (BeWeb)': place.Link_Beweb,
+    'Catalogo generale dei Beni Culturali': place.Link_CatBBCC,
+    'Le chiese delle diocesi italiane': place.Link_Chiese_ita,
+    'ASP Città di Bologna': place.Link_ASP,
+    'Città Metropolitana di Bologna': place.Link_cittàmetr_BO,
+  };
+
+  if (Object.values(linksAdditional).every(isLinkBlank)) {
+    document.getElementById('additional-links').style.display = 'none';
+  } else {
+    document.getElementById('link-list').innerHTML = '';
+    for (const [label, url] of Object.entries(linksAdditional)) {
+      if (!isLinkBlank(url)) {
+        document.getElementById('link-list').innerHTML += '<li><a href="' + url + '" target="_blank">' + label + ' <i class="fa-solid fa-arrow-up-right-from-square"></i></a></li>';
+      }
+    }
+    document.getElementById('additional-links').style.display = 'block';
+  }
+
+  document.getElementById('ui-float-popup').classList.add('visible');
+  document.getElementById('ui-float-top').classList.remove('visible');
+}
+
+// ── Sites list modal ──────────────────────────────────────────────────
+function populateSitesList() {
+  const sorted = placesData
+    .filter(function(p) { return !isNaN(parseFloat(p.Lat)) && !isNaN(parseFloat(p.Long)); })
+    .sort(function(a, b) { return a.Contenitore.localeCompare(b.Contenitore, 'it'); });
+
+  // Populate list with values from the dataset
+  const body = document.getElementById('modal-sites-body');
+  sorted.forEach(function(place) {
+    const btn = document.createElement('button');
+    btn.className = 'site-list-item';
+    btn.textContent = place.Contenitore;
+    btn.addEventListener('click', function() {
+      const item = allMarkers.find(function(m) { return m.marker.placeId === place.ID; });
+      if (!item) return;
+      const modal = bootstrap.Modal.getInstance(document.getElementById('modal-sites'));
+      if (modal) modal.hide();
+      clusterGroup.zoomToShowLayer(item.marker, function() {
+        activatePlace(place, item.marker);
+      });
+    });
+    body.appendChild(btn);
+  });
+
+  // To update values of the list
+  document.getElementById('sites-search').addEventListener('input', function() {
+    const q = this.value.toLowerCase();
+    document.querySelectorAll('.site-list-item').forEach(function(btn) {
+      btn.style.display = btn.textContent.toLowerCase().includes(q) ? '' : 'none';
+    });
+  });
+}
+
 // ── Marker initialisation ─────────────────────────────────────────
 function initMarkers() {
   if (markersInitialized) return;
@@ -260,103 +373,10 @@ function initMarkers() {
       opacity: 0.97
     });
 
-    // Event on marker click: open popup (with costum content) and set active marker styling
     marker.on('click', function (e) {
       L.DomEvent.stopPropagation(e);
       const place = placesData.find(function (p) { return p.ID === this.placeId; }, this);
-      console.log('place:', place.Contenitore);
-      setActiveMarker(this);
-
-      // ====== popup costumisation =======
-
-      // Title
-      document.getElementById('container-name').textContent = place.Contenitore;
-
-      // "Non più esistente" text visibility
-      if (isNonEsistente(place)) {
-        document.getElementById('non-existing-place-text').style.display = 'flex';
-      } else {
-        document.getElementById('non-existing-place-text').style.display = 'none';
-      }
-
-      // Image
-      if (place.Path) {
-        document.getElementById('card-img-container').style.display = 'flex';
-        document.querySelector('#card-img').src = `assets/images/thumb/${place.Path}`;
-      } else {
-        document.getElementById('card-img-container').style.display = 'none';
-      }
-
-      // Artworks documented in the site (LDCN, PRCD)
-      const hasCatalogLinks = place.LDCN !== "" || place.PRCD !== "";
-
-      if (hasCatalogLinks) {
-        if (place.LDCN) {
-          document.getElementById('btn-ldcn-container').style.display = 'inline-flex';
-          document.getElementById('btn-ldcn').href = place.LDCN;
-        } else {
-          document.getElementById('btn-ldcn-container').style.display = 'none';
-        }
-
-        if (place.PRCD) {
-          document.getElementById('btn-prcd-container').style.display = 'inline-flex';
-          document.getElementById('btn-prcd').href = place.PRCD;
-        } else {
-          document.getElementById('btn-prcd-container').style.display = 'none';
-        }
-
-        document.getElementById('catalogue-links').style.display = 'block';
-      } else {
-        document.getElementById('catalogue-links').style.display = 'none';
-      }
-
-      // Button for entry of the site
-      if (place.Scheda_Chiesa) {
-        document.getElementById('btn-site').href = place.Scheda_Chiesa;
-        document.getElementById('btn-site').style.display = 'inline-flex';
-        document.getElementById('btn-site-img').href = place.Scheda_Chiesa;
-      } else {
-        document.getElementById('btn-site').style.display = 'none';
-        document.getElementById('btn-site-img').href = '#';
-      }
-
-      // Additional resources
-      const isLinkBlank = (link) => link === "" || link === undefined;
-
-      let linksAddtional = {
-        'Storia e Memoria di Bologna': place.Link_StorieMemorie,
-        'Origine di Bologna': place.Link_OrigineBologna,
-        'Biblioteca Salaborsa': place.Link_BibSalaBorsa,
-        'Wikipedia': place.Link_Wiki,
-        'Genus Bononiae': place.Link_GenusBononiae,
-        'Centro Studi \'Gina Fasoli\'': place.Link_CentroFasoli,
-        'Biblioteca Comunale dell\'Archiginnasio': place.Link_Archiginnasio,
-        'Fondazione Cassa di Risparmio in Bologna': place.Link_Carisbo,
-        'Beni Ecclesiastici in Web (BeWeb)': place.Link_Beweb,
-        'Catalogo generale dei Beni Culturali': place.Link_CatBBCC,
-        'Le chiese delle diocesi italiane': place.Link_Chiese_ita,
-        'ASP Città di Bologna': place.Link_ASP,
-        'Città Metropolitana di Bologna': place.Link_cittàmetr_BO
-      }
-
-      if (Object.values(linksAddtional).every(isLinkBlank)) {
-        document.getElementById('additional-links').style.display = 'none';
-      } else {
-        document.getElementById('link-list').innerHTML = '';
-
-        for (const [label, url] of Object.entries(linksAddtional)) {
-          if (!isLinkBlank(url)) {
-            document.getElementById('link-list').innerHTML += `<li><a href="${url}" target="_blank">${label} <i class="fa-solid fa-arrow-up-right-from-square"></i></a></li>`;
-          }
-        }
-
-        document.getElementById('additional-links').style.display = 'block';
-      }
-
-      // ==================================
-
-      document.getElementById('ui-float-popup').classList.add('visible');
-      document.getElementById('ui-float-top').classList.remove('visible');
+      activatePlace(place, this);
     });
 
     allMarkers.push({ marker: marker, cat: isNonEsistente(place) ? primaryCat(place) : place.Categoria, nonEsistente: isNonEsistente(place) });
@@ -365,6 +385,7 @@ function initMarkers() {
 
   map.addLayer(clusterGroup);
   initChipFilters();
+  populateSitesList();
 }
 
 function closePopup() {
@@ -380,7 +401,6 @@ document.getElementById('btn').addEventListener('click', function () {
 
   hero.classList.add('up');
   float.classList.add('visible');
-  document.getElementById('ui-float-logos').classList.add('visible');
 
   // Show intro modal after the hero has finished lifting (1.1s transition)
   setTimeout(function () {
