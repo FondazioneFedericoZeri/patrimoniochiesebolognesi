@@ -420,3 +420,8 @@ document.getElementById('btn').addEventListener('click', function () {
     map.invalidateSize();
   }, 1200);
 });
+
+// ── Bootstrap tooltips ────────────────────────────────────────────
+document.querySelectorAll('[data-bs-tooltip="tooltip"]').forEach(function (el) {
+  new bootstrap.Tooltip(el);
+});

@@ -63,15 +63,15 @@
       <button id="btn" aria-label="Inizia">&#8595;</button>
       <div id="hero-sponsor-logos">
         <div class="hero-sponsor-item">
-          <span class="hero-sponsor-label">con il contributo di</span>
+          <span class="hero-sponsor-label">Con il contributo di</span>
           <a href="https://fondazionecarisbo.it/" target="_blank" rel="noopener">
-            <img src="assets/images/logo-carisbo-a-bandiera.jpg" alt="Fondazione Carisbo" class="hero-sponsor-img" />
+            <img src="assets/images/logo-carisbo-a-bandiera-white.png" alt="Fondazione Carisbo" class="hero-sponsor-img" />
           </a>
         </div>
         <div class="hero-sponsor-item">
-          <span class="hero-sponsor-label">con il patrocinio di</span>
+          <span class="hero-sponsor-label">Con il patrocinio di</span>
           <a href="https://www.chiesadibologna.it/" target="_blank" rel="noopener">
-            <img src="assets/images/logo-diocesi.png" alt="Arcidiocesi di Bologna" class="hero-sponsor-img" />
+            <img src="assets/images/logo-diocesi-white.png" alt="Arcidiocesi di Bologna" class="hero-sponsor-img" />
           </a>
         </div>
       </div>
@@ -97,11 +97,13 @@
 
       <div id="float-left-col">
         <!-- Magnifying glass → sites list modal -->
-        <button class="float-circle-btn" id="btn-sites-modal" data-bs-toggle="modal" data-bs-target="#modal-sites">
+        <button class="float-circle-btn" id="btn-sites-modal" data-bs-toggle="modal" data-bs-target="#modal-sites"
+          data-bs-tooltip="tooltip" data-bs-placement="right" title="Ricerca una chiesa">
           <i class="fa-solid fa-magnifying-glass"></i>
         </button>
         <!-- Circular button → info modal -->
-        <button class="float-circle-btn" id="btn-float-modal" data-bs-toggle="modal" data-bs-target="#modal-float">
+        <button class="float-circle-btn" id="btn-float-modal" data-bs-toggle="modal" data-bs-target="#modal-float"
+          data-bs-tooltip="tooltip" data-bs-placement="right" title="Istruzioni per la navigazione">
           <i class="fa-solid fa-question"></i>
         </button>
       </div>
@@ -278,7 +280,7 @@
           <h5 class="modal-title mb-3" id="modal-intro-label">Una nuova modalità di fruizione del catalogo Zeri</h5>
           <p>La Fondazione Federico Zeri presenta una nuova visualizzazione dedicata al patrimonio ecclesiastico bolognese schedato nel proprio catalogo online.</p>
           <p>Una mappa interattiva consente di individuare i diversi luoghi di culto, ancora esistenti o scomparsi, di accedere alle informazioni sugli edifici e sulle opere d’arte, sia quelle ancora conservate in loco, sia quelle distrutte, rimosse o musealizzate.</p>
-          <p>Grazie al contributo della Fondazione Carisbo, la documentazione sul patrimonio cittadino è stata arricchita dalle fotografie dell’archivio professionale di <a href="https://catalogo.fondazionezeri.unibo.it/scheda.livello.jsp?decorator=layout_resp&apply=true&locale=it&id=4&tipo_scheda=fondo">Mario Berardi</a>, recentemente schedate dalla Fondazione.</p>
+          <p>Grazie al contributo della Fondazione Carisbo, la documentazione sul patrimonio cittadino è stata arricchita dalle fotografie dell’archivio professionale di <a href="https://catalogo.fondazionezeri.unibo.it/scheda.livello.jsp?decorator=layout_resp&apply=true&locale=it&id=4&tipo_scheda=fondo">Mario Berardi</a>, recentemente schedate dalla Fondazione, con il contributo della Fondazione Cassa di Risparmio in Bologna.</p>
           <div class="justify-content-end d-flex mt-3">
             <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Esplora la mappa</button>
           </div>
@@ -292,11 +294,11 @@
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-carisbo">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="modal-sites-label">Tutti i siti</h5>
+          <h5 class="modal-title" id="modal-sites-label">Elenco delle chiese</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Chiudi"></button>
         </div>
         <div class="modal-body">
-          <input type="text" id="sites-search" class="form-control mb-3" placeholder="Cerca sito...">
+          <input type="text" id="sites-search" class="form-control mb-3" placeholder="Cerca una chiesa...">
           <div id="modal-sites-body"></div>
         </div>
       </div>

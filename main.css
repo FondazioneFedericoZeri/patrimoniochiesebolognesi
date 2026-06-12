@@ -239,7 +239,7 @@ body {
 
 #hero-copyright p {
   font-family: var(--font-sans);
-  font-size: var(--text-sm);
+  font-size: calc(var(--text-sm) * 0.85);
   color: rgba(255, 255, 255, 0.65);
   margin: 0;
   text-align: left;
@@ -263,9 +263,8 @@ body {
 
 .hero-sponsor-label {
   font-family: var(--font-sans);
-  font-size: 0.62rem;
+  font-size: var(--text-sm);
   color: rgba(255, 255, 255, 0.6);
-  text-transform: uppercase;
   letter-spacing: 0.06em;
 }
 
@@ -589,7 +588,7 @@ path.active-marker {
 
 #popup-title-row {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 8px;
 }
 
