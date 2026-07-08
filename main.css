@@ -245,6 +245,10 @@ body {
   text-align: left;
 }
 
+.hero-sponsor-label {
+  font-size: calc(var(--text-sm) * 0.85) !important;
+}
+
 #hero-sponsor-logos {
   flex: 1;
   display: flex;
